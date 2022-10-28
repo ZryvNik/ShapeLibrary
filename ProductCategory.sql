@@ -1,3 +1,4 @@
+-- MS SQL
 CREATE TABLE Product(ID int, name varchar, PRIMARY KEY (ID));
 CREATE TABLE Category(ID int, name varchar, PRIMARY KEY (ID));
 CREATE TABLE ProductCategory(ID int, ProductId int, CategoryId int, PRIMARY KEY (ID), FOREIGN KEY (ProductId) REFERENCES Product(ID), FOREIGN KEY (CategoryId) REFERENCES Category(ID));
