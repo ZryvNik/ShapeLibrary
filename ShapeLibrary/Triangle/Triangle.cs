@@ -2,12 +2,17 @@
 
 namespace ShapeLibrary
 {
-    public class Triangle : Shape
+    /// <summary>
+    /// Фигура треугольник
+    /// </summary>
+    public class Triangle : IAreaAvailable, ICanBeRightangle
     {
         private readonly double _a;
         private readonly double _b;
         private readonly double _c;
 
+        /// <exception cref="ArgumentException">Если один из аргументов меньше или равен 0</exception>
+        /// <exception cref="ArgumentException">Если одна из сторон длинее чем сумма двух других</exception>
         public Triangle(double a, double b, double c)
         {
             //Не может быть отрицательных значений сторон или 0
@@ -30,18 +35,35 @@ namespace ShapeLibrary
             _c = c;
         }
 
-        public override double Area()
+        /// <summary>
+        /// Возвращает площадь треугольника
+        /// </summary>
+        /// <returns>double</returns>
+        public double Area()
         {
             //Находим площадь через полупериметр
             var p = (_a + _b + _c) / 2;
             return Math.Sqrt(p * (p - _a) * (p - _b) * (p - _c));
         }
 
+        /// <summary>
+        /// Возвращает площадь треугольника с заданными сторонами
+        /// </summary>
+        /// <param name="a"></param>
+        /// <param name="b"></param>
+        /// <param name="c"></param>
+        /// <exception cref="ArgumentException">Если один из аргументов меньше или равен 0</exception>
+        /// <exception cref="ArgumentException">Если одна из сторон длинее чем сумма двух других</exception>
+        /// <returns>double</returns>
         public static double Area(double a, double b, double c)
         {
             return new Triangle(a, b, c).Area();
         }
 
+        /// <summary>
+        /// Возвращает, является ли треугольник прямоугольным
+        /// </summary>
+        /// <returns>True/False</returns>
         public bool IsRightangle()
         {
             //В прямоугольном треугольнике квадрат гипотенузы
@@ -55,6 +77,12 @@ namespace ShapeLibrary
                 return _a * _a == (_c * _c + _b * _b);
         }
 
+        /// <summary>
+        /// Возвращает, является ли треугольник прямоугольным
+        /// </summary>
+        /// <exception cref="ArgumentException">Если один из аргументов меньше или равен 0</exception>
+        /// <exception cref="ArgumentException">Если одна из сторон длинее чем сумма двух других</exception>
+        /// <returns>True/False</returns>
         public static bool IsRightangle(double a, double b, double c)
         {
             return new Triangle(a, b, c).IsRightangle();

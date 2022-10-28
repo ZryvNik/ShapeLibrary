@@ -16,10 +16,12 @@ circle = new Circle(15);
 Console.WriteLine($"Площадь круга: {circle.Area()}");
 
 Console.WriteLine("Коллекция элементов");
-var list = new List<Shape>();
-list.Add(triangle);
-list.Add(circle);
-foreach(var shape in list)
+var list = new List<IAreaAvailable>
+{
+    triangle,
+    circle
+};
+foreach (var shape in list)
 {
     Console.WriteLine($"Площадь фигуры: {shape.Area()}");
 }

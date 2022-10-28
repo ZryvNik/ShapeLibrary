@@ -2,19 +2,19 @@ namespace ShapeLibrary.UnitTests
 {
     public class CircleTests
     {
-        [Fact]
-        public void TheAreaOfCircleWithRadius10IsPImultipleBy50()
+        [Fact(DisplayName = "Метод Area должен вернуть площадь круга с радиусом 10 равную PI * 100")]
+        public void TheAreaOfCircleWithRadius10IsPImultipleBy100()
         {
             //arrange
-            var expectedArea = Math.PI * 10 * 10 / 2; 
+            var expectedArea = Math.PI * 10 * 10; 
             //act
             var area = Circle.Area(10);
             //assert
             Assert.Equal(expectedArea, area);
         }
 
-        [Fact]
-        public void TheAreaOfCircleWithRadius0IsPImultipleBy50()
+        [Fact(DisplayName = "Для круга с радиусом 0 площадь равна 0")]
+        public void TheAreaOfCircleWithRadius0Is0()
         {
             //act
             var area = Circle.Area(0);
@@ -22,7 +22,7 @@ namespace ShapeLibrary.UnitTests
             Assert.Equal(0, area);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Возвращает ошибку, если радиус меньше 0")]
         public void ThrowExceptionWhenRadiusLessThen0()
         {
             //act

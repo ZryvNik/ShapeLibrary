@@ -2,7 +2,7 @@
 {
     public class TriangleTests
     {
-        [Theory]
+        [Theory(DisplayName = "Возвращает верное значение площади треугольника")]
         [InlineData(2000000000000000000000.0, 1500000000000000000000.0, 700000000000000000000.0, 4.2E+41)]
         [InlineData(3.0, 4.0, 5.0, 6.0)]
         public void TheAreaOfTriangleWithDefinedSidesIs(double a, double b, double c, double expectedArea)
@@ -13,7 +13,7 @@
             Assert.Equal(expectedArea, area);
         }
 
-        [Theory]
+        [Theory(DisplayName = "Метод IsRightangle возвращает true если треугольник прямоугольный")]
         [InlineData(3.0, 4.0, 5.0)]
         [InlineData(60.0, 80.0, 100.0)]
         public void TriangleIsRightangled(double a, double b, double c)
@@ -24,7 +24,7 @@
             Assert.True(isRightangle);
         }
 
-        [Theory]
+        [Theory(DisplayName = "Метод IsRightangle возвращает false, если треугольник не прямоугольный")]
         [InlineData(13.0, 14.0, 15.0)]
         [InlineData(64.0, 81.0, 111.0)]
         public void TriangleIsNotRightangled(double a, double b, double c)
@@ -35,7 +35,19 @@
             Assert.False(isRightangle);
         }
 
-        [Theory]
+        [Theory(DisplayName = "Возвращает true если треугольник прямоугольный, независимо от того в каком порядке были заданы величины сторон")]
+        [InlineData(3.0, 4.0, 5.0)]
+        [InlineData(4.0, 5.0, 3.0)]
+        [InlineData(5.0, 4.0, 3.0)]
+        public void SameResultIfSwapParameters(double a, double b, double c)
+        {
+            //act
+            var isRightangle = Triangle.IsRightangle(a, b, c);
+            //assert
+            Assert.True(isRightangle);
+        }
+
+        [Theory(DisplayName = "Ошибка, если значение a меньше нуля")]
         [InlineData(0.0)]
         [InlineData(-1.0)]
         public void ThrowExceptionWhenSideALessOrEqual0(double a)
@@ -46,7 +58,7 @@
             Assert.Equal($"a ({a}) cannot be less or equal 0", error.Message);
         }
 
-        [Theory]
+        [Theory(DisplayName = "Ошибка, если значение b меньше нуля")]
         [InlineData(0.0)]
         [InlineData(-1.0)]
         public void ThrowExceptionWhenSideBLessOrEqual0(double b)
@@ -57,7 +69,7 @@
             Assert.Equal($"b ({b}) cannot be less or equal 0", error.Message);
         }
 
-        [Theory]
+        [Theory(DisplayName = "Ошибка, если значение c меньше нуля")]
         [InlineData(0.0)]
         [InlineData(-1.0)]
         public void ThrowExceptionWhenSideCLessOrEqual0(double c)
@@ -68,7 +80,7 @@
             Assert.Equal($"c ({c}) cannot be less or equal 0", error.Message);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Ошибка, если значение a больше чем сумма b и c")]
         public void ThrowExceptionWhenASideMoreThenSumOfBSideAndCSide()
         {
             //arrange
@@ -81,7 +93,7 @@
             Assert.Equal($"a ({a}) cannot be more or equal b + c ({b + c})", error.Message);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Ошибка, если значение b больше чем сумма a и c")]
         public void ThrowExceptionWhenBSideMoreThenSumOfASideAndCSide()
         {
             //arrange
@@ -94,7 +106,7 @@
             Assert.Equal($"b ({b}) cannot be more or equal a + c ({a + c})", error.Message);
         }
 
-        [Fact]
+        [Fact(DisplayName = "Ошибка, если значение c больше чем сумма b и a")]
         public void ThrowExceptionWhenCSideMoreThenSumOfASideAndBSide()
         {
             //arrange
